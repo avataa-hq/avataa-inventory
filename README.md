@@ -64,62 +64,62 @@ ZEEBE_PORT=<zeebe_grpc_port>
 
 ### Database
 
-`DB_TYPE` Type of database 
-(default: _postgresql_)  
-`DB_USER` Pre-created user in the database with rights to edit the database 
-(default: _inventory_admin_)  
+`DB_TYPE` Type of database
+(default: _postgresql_)
+`DB_USER` Pre-created user in the database with rights to edit the database
+(default: _inventory_admin_)
 `DB_PASS` Database user password
-(default: _inventory_pass_)  
+(default: _inventory_pass_)
 `DB_HOST` Database host
-(default: _localhost_)  
-`DB_PORT`  Database port 
-(default: _5432_)  
+(default: _localhost_)
+`DB_PORT`  Database port
+(default: _5432_)
 `DB_NAME`  Name of the previously created database
-(default: _inventory_)  
+(default: _inventory_)
 
 ### Kafka
 
 `KAFKA_URL` kafka address
-(default: _127.0.0.1:9092_)  
+(default: _127.0.0.1:9092_)
 `KAFKA_TOPIC` messaging thread
-(default: _New_Topic_)  
+(default: _New_Topic_)
 
 ### Keycloak
 
 `KEYCLOAK_PROTOCOL` Protocol for internal communication of microservice with Keycloak
-(default: _http_)  
+(default: _http_)
 `KEYCLOAK_HOST` Host for internal communication of microservice with Keycloak
-(default: _keycloak_)  
+(default: _keycloak_)
 `KEYCLOAK_PORT` Port for internal communication of microservice with Keycloak
-(default: _8080_)  
+(default: _8080_)
 `KEYCLOAK_REDIRECT_PROTOCOL` Protocol that is used to redirect the user for authorization in Keycloak
-(default: _as in key `KEYCLOAK_PROTOCOL`_)  
+(default: _as in key `KEYCLOAK_PROTOCOL`_)
 `KEYCLOAK_REDIRECT_HOST` Host that is used to redirect the user for authorization in Keycloak
-(default: _as in key `KEYCLOAK_HOST`_)  
+(default: _as in key `KEYCLOAK_HOST`_)
 `KEYCLOAK_REDIRECT_PORT` Port that is used to redirect the user for authorization in Keycloak
-(default: _as in key `KEYCLOAK_PORT`_)  
+(default: _as in key `KEYCLOAK_PORT`_)
 `KEYCLOAK_REALM`  Realm for the current microservice
-(default: _master_)  
-`KEYCLOAK_CLIENT_ID` Client ID for the current microservice 
+(default: _master_)
+`KEYCLOAK_CLIENT_ID` Client ID for the current microservice
 `KEYCLOAK_CLIENT_SECRET` Client secret for the current microservice
-(default: _EMPTY_)  
+(default: _EMPTY_)
 
 ### OPA
 
 `OPA_PROTOCOL` = Protocol for internal communication of microservice with OPA
-(default: _http_)  
+(default: _http_)
 `OPA_HOST` = Host for internal communication of microservice with OPA
-(default: _opa_)  
+(default: _opa_)
 `OPA_PORT` = Port for internal communication of microservice with OPA
-(default: _8181_)  
+(default: _8181_)
 `OPA_POLICY` = The name of the policy for checking access rights
-(default: _main_)  
+(default: _main_)
 
 ### Other
 
 `DEBUG` Debug mode
-(default: _False_)  
-`TEST_DOCKER_DB_HOST` Variable for test environment if external dockers 
+(default: _False_)
+`TEST_DOCKER_DB_HOST` Variable for test environment if external dockers
 `SECURITY_TYPE` microservice security type (default: _DISABLE_):
 - `DISABLE` protection disabled
 - `KEYCLOAK` protection is organized on the verification of the token by the microservice
@@ -128,7 +128,7 @@ ZEEBE_PORT=<zeebe_grpc_port>
 
 ### Compose
 
-- `REGISTRY_URL` - Docker regitry URL, e.g. `harbor.avataa.dev`
+- `REGISTRY_URL` - Docker regitry URL, e.g. `harbor.domain.com`
 - `PLATFORM_PROJECT_NAME` - Docker regitry project Docker image can be downloaded from, e.g. `avataa`
 
 ## Requirements
