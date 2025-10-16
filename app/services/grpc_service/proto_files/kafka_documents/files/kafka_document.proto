@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+message Document {
+  repeated int32 mo_id = 1;
+}

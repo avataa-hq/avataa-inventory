@@ -1,0 +1,9 @@
+# docker
+.dockerignore
+Dockerfile*
+*compose*.*ml
+
+# git
+.git*
+*.md
+.env*

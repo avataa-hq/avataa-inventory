@@ -1,0 +1,133 @@
+syntax = "proto3";
+package zeebe_client;
+
+service ZeebeInformer {
+    rpc ReadObjectTypes (InReadObjectTypes) returns (OutTMOArray) {}
+    rpc ReadObjects (InReadObjects) returns (OutMOArray) {}
+    rpc ReadObjectTypeParamTypes (InReadObjectTypeParamTypes) returns (OutTPRMArray) {}
+    rpc UpdateObjectType (InUpdateObjectType) returns (TMO) {}
+    rpc ReadChildObjectTypes (InReadChildObjectTypes) returns (OutTMOArray) {}
+    rpc GetTMOIdsByMoIds (InGetTMOIdsByMoIds) returns (OutGetTMOIdsByMoIds) {}
+}
+
+message InReadObjectTypes {
+    repeated int32 id = 1;
+}
+
+message TMO {
+    int32 id = 1;
+    int32 version = 2;
+    string name = 3;
+    optional int32 p_id = 4;
+    optional int32 latitude = 5;
+    optional int32 longitude = 6;
+    optional int32 status = 7;
+    optional string icon = 8;
+    optional string description = 9;
+    optional int32 child_count = 10;
+    bool virtual = 11;
+    bool global_uniqueness = 12;
+    repeated int32 primary = 13;
+    string created_by = 14;
+    string modified_by = 15;
+    string creation_date = 16;
+    string modification_date = 17;
+    optional string lifecycle_process_definition = 18;
+    optional string geometry_type = 19;
+    optional int32 severity_id = 20;
+    optional bool materialize = 21;
+    repeated int32 points_constraint_by_tmo = 22;
+    bool minimize = 23;
+    optional string line_type = 24;
+    repeated int64 label = 25;
+}
+
+message OutTMOArray {
+    repeated TMO tmo = 1;
+}
+
+message InReadObjects {
+    optional string query = 1;
+    optional int32 object_type_id = 2;
+    optional int32 p_id = 3;
+    optional string name = 4;
+    repeated int32 obj_id = 5;
+    bool with_parameters = 6;
+    bool active = 7;
+    int32 limit = 8;
+    int32 offset = 9;
+    repeated int32 order_by_tprms_id = 10;
+    repeated bool order_by_asc = 11;
+    bool identifiers_instead_of_values = 12;
+}
+
+message OutMOArray {
+    repeated string array = 1;
+}
+
+message InReadObjectTypeParamTypes {
+    int32 id = 1;
+    optional string group = 2;
+    repeated int32 tprm_ids = 3;
+}
+
+message TPRM {
+    optional string description = 1;
+    bool multiple = 2;
+    bool required = 3;
+    bool returnable = 4;
+    optional string constraint = 5;
+    optional string prm_link_filter = 6;
+    optional string group = 7;
+    int32 id = 8;
+    int32 version = 9;
+    string creation_date = 10;
+    string modification_date = 11;
+    string name = 12;
+    string val_type = 13;
+    int32 tmo_id = 14;
+    string created_by = 15;
+    string modified_by = 16;
+    optional string field_value = 17;
+}
+
+message OutTPRMArray {
+    repeated TPRM array = 1;
+}
+
+message TMOUpdate {
+    int32 version = 1;
+    optional string name = 2;
+    optional int32 p_id = 3;
+    optional int32 latitude = 4;
+    optional int32 longitude = 5;
+    optional int32 status = 6;
+    optional string icon = 7;
+    optional string description = 8;
+    optional bool virtual = 9;
+    optional bool global_uniqueness = 10;
+    repeated int32 primary = 11;
+    optional string lifecycle_process_definition = 12;
+    optional int32 severity_id = 13;
+    optional string geometry_type = 14;
+    optional string line_type = 15;
+    repeated int64 label = 16;
+}
+
+message InUpdateObjectType {
+    int32 id = 1;
+    TMOUpdate object_type = 2;
+    repeated string reset_parameters = 3;
+}
+
+message InReadChildObjectTypes {
+    int32 parent_id = 1;
+}
+
+message InGetTMOIdsByMoIds {
+    repeated int32 mo_ids = 1;
+}
+
+message OutGetTMOIdsByMoIds {
+    map <int32, int32> mapper = 1;
+}

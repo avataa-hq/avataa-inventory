@@ -1,0 +1,15 @@
+syntax = "proto3";
+package dataview_to_inventory;
+
+service DataviewToInventory {
+  rpc GetMOByTMOIdForView (GetMOByTMOIdForViewRequest) returns (stream GetMOByTMOIdForViewResponse) {}
+}
+
+message GetMOByTMOIdForViewRequest {
+    int32 tmo_id = 1;
+    optional bool replace_links = 2;
+}
+
+message GetMOByTMOIdForViewResponse {
+    repeated string mos_with_params = 1;
+}

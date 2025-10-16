@@ -1,0 +1,64 @@
+[project]
+name = "inventory"
+version = "3.0.57"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp==3.10.11",
+    "alembic==1.7.4",
+    "asyncpg==0.27.0",
+    "cachetools==6.1.0",
+    "celery==5.2.7",
+    "confluent-kafka[protobuf,schemaregistry]==2.10.1",
+    "fastapi==0.116.1",
+    "flower==1.2.0",
+    "geopy==2.4.1",
+    "grpcio==1.64.1",
+    "httpx==0.26.0",
+    "minio==7.2.0",
+    "numpy==1.26.4",
+    "openpyxl==3.1.5",
+    "pandas==1.5.3",
+    "protobuf==5.29.3",
+    "pyjwt[crypto]==2.10.1",
+    "pytest-asyncio==0.18.3",
+    "pytest-grpc==0.8.0",
+    "pytest-mock==3.10.0",
+    "python-multipart==0.0.20",
+    "redis==4.5.4",
+    "requests==2.32.4",
+    "sqlalchemy[asyncio]==2.0.42",
+    "sqlmodel==0.0.24",
+    "uvicorn==0.35.0",
+    "xlsxwriter==3.2.5",
+    "resistant-kafka-avataa==0.9.8a1",
+    "pydantic==2.11.7",
+    "psycopg2-binary==2.9.10",
+]
+
+[dependency-groups]
+dev = [
+    "grpcio-tools==1.64.1",
+    "pre-commit==4.2.0",
+]
+lint = [
+    "ruff==0.12.7",
+]
+tests = [
+    "pytest==7.3.2",
+    "testcontainers==4.10.0",
+    "asyncpg>=0.27.0",
+]
+security = [
+    "pip-audit==2.7.3",
+]
+migrations = [
+    "alembic==1.7.4",
+    "sqlalchemy[asyncio]>=2.0.42",
+    "sqlmodel==0.0.24",
+    "psycopg2-binary==2.9.10",
+    "protobuf==5.29.3",
+    "grpcio==1.64.1",
+    "asyncpg>=0.27.0",
+]

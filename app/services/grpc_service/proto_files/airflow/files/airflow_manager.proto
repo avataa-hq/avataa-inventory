@@ -1,0 +1,135 @@
+syntax = "proto3";
+package inventory;
+
+
+service AirflowManager {
+  rpc BatchImport (stream RequestBatchImport) returns (ResponseBatchImport) {}
+  rpc BatchExport (RequestBatchExport) returns (stream ResponseBatchExport) {}
+  rpc CreateTMOorGetInfo (RequestCreateTMOOrGetInfo) returns (ResponseCreateTMOOrGetInfo) {}
+  rpc CreateTPRMsForTMO (RequestCreateTPRMsForTMO) returns (ResponseCreateTPRMsForTMO) {}
+  rpc DeleteAllObjectsInTMO (RequestDeleteAllObjects) returns (ResponseDeleteAllObjects) {}
+  rpc GetTMOName (RequestGetTMOName) returns (ResponseGetTMOName) {}
+  rpc GetTPRMNamesByIds (RequestGetTPRMNamesByIds) returns (ResponseGetTPRMNamesByIds) {}
+  rpc GetRequiredFields (RequestGetRequiredFields) returns (ResponseGetRequiredFields) {}
+  rpc GetMOAttrsAndTPRMs (RequestGetMOAttrsAndTPRMs) returns (ResponseGetMOAttrsAndTPRMs) {}
+  rpc GetTMOLocations (RequestGetTMOLocations) returns (stream ResponseGetTMOLocations) {}
+}
+
+message RequestBatchImport {
+    int32 tmo_id = 1;
+    string content = 2;
+}
+
+message ResponseBatchImport {
+    string status = 1;
+    optional string message = 2;
+}
+
+message RequestCreateTMOOrGetInfo {
+    string name = 1;
+    optional int32 p_id = 2;
+    optional string icon = 3;
+    optional string description = 4;
+    optional bool global_uniqueness = 6;
+    optional string lifecycle_process_definition = 7;
+    optional string geometry_type = 8;
+    optional bool materialize = 9;
+    repeated int64 label = 10;
+}
+
+message ResponseCreateTMOOrGetInfo {
+    string status = 1;
+    optional int32 tmo_id = 2;
+    optional string name = 3;
+    optional string message = 4;
+}
+
+message RequestCreateTPRMsForTMO {
+    int32 tmo_id = 1;
+    repeated TPRMInfo tprms = 2;
+}
+
+message TPRMInfo {
+    string name = 1;
+    optional string description = 2;
+    string val_type = 3;
+    bool multiple = 4;
+    bool required = 5;
+    bool returnable = 6;
+    optional string constraint = 7;
+    optional string prm_link_filter = 8;
+    optional string group = 9;
+    optional string field_value = 10;
+}
+
+message ResponseCreateTPRMsForTMO {
+    string status = 1;
+    optional string message = 2;
+    optional TPRMNameToId tprms = 3;
+}
+
+message TPRMNameToId {
+    map<string, int32> mapper = 1;
+}
+
+message RequestBatchExport {
+    int32 tmo_id = 1;
+    string file_type = 2;
+    repeated string prm_type_names = 3;
+}
+
+message ResponseBatchExport {
+    string status = 1;
+    optional string message = 2;
+    optional string content = 3;
+}
+
+message RequestDeleteAllObjects {
+    int32 tmo_id = 1;
+}
+
+message ResponseDeleteAllObjects {
+    string status = 1;
+    optional string message = 2;
+}
+
+message RequestGetTMOName {
+    int32 tmo_id = 1;
+}
+
+message ResponseGetTMOName {
+    string name = 1;
+}
+
+message RequestGetTPRMNamesByIds {
+    repeated int32 tprm_ids = 1;
+}
+
+message ResponseGetTPRMNamesByIds {
+    map<int32, string> mapper = 1;
+}
+
+message RequestGetRequiredFields {
+    int32 tmo_id = 1;
+}
+
+message ResponseGetRequiredFields {
+    map <int32, string> fields = 1;
+}
+
+message RequestGetMOAttrsAndTPRMs {
+    int64 tmo_id = 1;
+}
+
+message ResponseGetMOAttrsAndTPRMs {
+    repeated string columns = 1;
+}
+
+message RequestGetTMOLocations {
+    int64 tmo_id = 1;
+}
+
+message ResponseGetTMOLocations {
+    string name = 1;
+    string geometry = 2;
+}

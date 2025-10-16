@@ -1,0 +1,156 @@
+syntax = "proto3";
+package graph;
+import "google/protobuf/timestamp.proto";
+
+service GraphInformer {
+  rpc GetTMOTree (InTmoId) returns (OutGetTMOTree) {}
+  rpc GetTPRMsByTMOid (InTmoIds) returns (OutTprms) {}
+  rpc GetMOsByTMOid (InMOsByTMOid) returns (stream OutMOsStream) {}
+  rpc GetMOsByTMOidPages (InMOsByTMOid) returns (OutMOsStream) {}
+  rpc GetTmoByMoId (InTmoByMoId) returns (OutTmoId) {}
+  rpc GetMOsByMoIds (InMOsByMoIds) returns (OutMOsByMoIds) {}
+  rpc GetPRMsByPRMIds (InPRMsByPRMIds) returns (OutPRMsByPRMIds) {}
+  rpc GetPointTmoConst (InTmoId) returns (OutTmoIds) {}
+  rpc GetTprmConst (InTprmId) returns (OutTmoIds) {}
+  rpc GetTprmByTprmIds (InTprmIds) returns (OutTprms) {}
+}
+
+message InTmoId {
+  optional int64 tmo_id = 1;
+}
+
+message InTprmId {
+  optional int64 tprm_id = 1;
+}
+
+message InTprmIds {
+  repeated int64 tprm_ids = 1;
+}
+
+message TreeNode {
+  string name = 1;
+  optional int64 p_id = 2;
+  optional string icon = 3;
+  optional string description = 4;
+  bool virtual = 5;
+  bool global_uniqueness = 6;
+  optional string lifecycle_process_definition = 7;
+  optional string geometry_type = 8;
+  bool materialize = 9;
+  repeated int64 points_constraint_by_tmo = 10;
+  repeated TreeNode child = 11;
+  int64 id = 12;
+  bool minimize = 13;
+  optional string created_by = 14;
+  optional string modified_by = 15;
+  optional int64 latitude = 16;
+  optional int64 longitude = 17;
+  optional google.protobuf.Timestamp creation_date = 18;
+  optional google.protobuf.Timestamp modification_date = 19;
+  repeated int64 primary = 20;
+  optional int64 severity_id = 21;
+  optional int64 status = 22;
+  optional int32 version = 23;
+  optional string line_type = 24;
+  repeated int64 label = 25;
+}
+
+message OutGetTMOTree {
+  repeated TreeNode nodes = 1;
+}
+
+message InTmoIds {
+  repeated int64 tmo_id = 1;
+}
+
+message TPRM {
+  string name = 1;
+  optional string description = 2;
+  string val_type = 3;
+  bool  multiple = 4;
+  bool required = 5;
+  bool returnable = 6;
+  optional string constraint = 7;
+  optional string prm_link_filter = 8;
+  optional string group = 9;
+  int64 tmo_id = 10;
+  int64 id = 11;
+  string field_value = 12;
+  optional string created_by = 13;
+  optional string modified_by = 14;
+  optional google.protobuf.Timestamp creation_date = 15;
+  optional google.protobuf.Timestamp modification_date = 16;
+  optional int32 version = 17;
+}
+
+message OutTprms {
+  repeated TPRM tprms = 1;
+}
+
+message InMOsByTMOid {
+  int64 tmo_id = 1;
+  string mo_filter_by = 2; //JSON
+  string prm_filter_by = 3; //JSON
+  bool  keep_mo_without_prm = 4;
+  int32 chunk_size = 5;
+  int32 offset = 6;
+}
+
+message PRM {
+  int64 tprm_id = 1;
+  int64 mo_id = 2;
+  string value = 3;
+  int64 id = 4;
+  int32 version = 5;
+}
+
+message MO {
+  int64 tmo_id = 1;
+  optional int64 p_id = 2;
+  int64  id = 3;
+  string name = 4;
+  float latitude = 5;
+  float longitude = 6;
+  string pov = 7; //JSON
+  string geometry = 8; //JSON
+  string model = 9;
+  bool active = 10;
+  int64 point_a_id = 11;
+  int64 point_b_id = 12;
+  string status = 13;
+  int64 version = 14;
+  repeated PRM params = 15;
+  optional string label = 16;
+}
+
+message OutMOsStream {
+  repeated MO mo = 1;
+}
+
+message InTmoByMoId {
+  int64 mo_id = 1;
+}
+
+message OutTmoId {
+  int64 tmo_id = 1;
+}
+
+message InMOsByMoIds {
+  repeated int64 mo_ids = 1;
+}
+
+message OutMOsByMoIds {
+  repeated MO mos = 1;
+}
+
+message InPRMsByPRMIds {
+  repeated int64 prm_ids = 1;
+}
+
+message OutPRMsByPRMIds {
+  repeated PRM prms = 1;
+}
+
+message OutTmoIds {
+  repeated int64 tmo_ids = 1;
+}

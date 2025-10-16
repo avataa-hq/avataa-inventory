@@ -1,0 +1,36 @@
+syntax = "proto3";
+package dataflow_manager;
+
+service DataflowManager {
+    rpc GetTPRMNamesOfTMO (RequestGetTPRMNamesOfTMO) returns (ResponseGetTPRMNamesOfTMO) {}
+    rpc GetObjectsWithParams (RequestGetObjectsWithParams) returns (stream ResponseGetObjectsWithParams) {}
+    rpc GetTPRMNameToTypeMapper (RequestGetTPRMNameToTypeMapper) returns (ResponseGetTPRMNameToTypeMapper) {}
+}
+
+message RequestGetTPRMNamesOfTMO {
+    int32 tmo_id = 1;
+}
+
+message ResponseGetTPRMNamesOfTMO {
+    repeated string column = 1;
+}
+
+message RequestGetObjectsWithParams {
+    int32 tmo_id = 1;
+    repeated string tprm_names = 2;
+    int32 limit = 3;
+    optional int32 offset = 4;
+}
+
+message ResponseGetObjectsWithParams {
+    string data = 1;
+}
+
+message RequestGetTPRMNameToTypeMapper {
+    int32 tmo_id = 1;
+    repeated string columns = 2;
+}
+
+message ResponseGetTPRMNameToTypeMapper {
+    map <string, string> mapper = 1;
+}

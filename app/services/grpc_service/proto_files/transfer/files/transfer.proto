@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+service Transfer {
+  rpc GetTMOPermission (Empty) returns (stream ListPermission) {}
+  rpc GetMOPermission (Empty) returns (stream ListPermission) {}
+  rpc GetTPMPermission (Empty) returns (stream ListPermission) {}
+}
+
+message Empty {}
+
+message Permission {
+  int32 id = 1;
+  optional int32 parent_id = 2;
+  string permission = 3;
+  string permission_name = 4;
+  optional int32 root_permission_id = 5;
+  bool read = 6;
+  bool delete = 7;
+  bool active = 8;
+  bool create = 9;
+  bool update = 10;
+  bool admin = 11;
+}
+
+message ListPermission {
+  repeated Permission permission = 1;
+}

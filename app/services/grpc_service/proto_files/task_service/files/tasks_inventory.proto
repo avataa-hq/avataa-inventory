@@ -1,0 +1,25 @@
+syntax = "proto3";
+package tasks_inventory;
+
+service TasksInventory {
+  rpc CreateObjectWithParams(CreateObjectWithParamsRequest) returns (CreateObjectWithParamsResponse);
+}
+
+message CreateObjectWithParamsRequest {
+    int64 tmo_id = 1;
+    int64 p_id = 2;
+    int64 point_a_id = 3;
+    int64 point_b_id = 4;
+    string pov = 5;
+    string geometry = 6;
+    repeated Param params = 7;
+}
+
+message Param {
+  string value = 1;
+  int32 tprm_id = 2;
+}
+
+message CreateObjectWithParamsResponse {
+}
+

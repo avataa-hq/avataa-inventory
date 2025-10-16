@@ -1,0 +1,16 @@
+syntax = "proto3";
+package documents;
+
+service DocumentInformer {
+    rpc GetObjectDocumentCount (RequestGetObjectDocumentCount) returns (stream ResponseGetObjectDocumentCount) {}
+}
+
+
+message RequestGetObjectDocumentCount{
+    bool check = 1;
+}
+
+
+message ResponseGetObjectDocumentCount{
+    map <int32, int32> object_and_documents = 1;
+}

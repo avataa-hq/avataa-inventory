@@ -1,0 +1,27 @@
+syntax = "proto3";
+package security_manager;
+
+service SecurityManagerInformer {
+    rpc GetMOPermissions (RequestPermissionsForMO) returns (stream MOPermissions) {}
+
+}
+
+message RequestPermissionsForMO {
+    bool get_permissions = 1;
+}
+
+message MOPermission {
+    bool read = 1;
+    bool update = 2;
+    bool create = 3;
+    bool delete = 4;
+    string permission = 5;
+    bool admin = 6;
+    int32 parent_id = 7;
+    int32 root_permission_id = 8;
+    string permission_name = 9;
+}
+
+message MOPermissions {
+    repeated MOPermission mo_permissions = 1;
+}
